@@ -7,7 +7,7 @@ TOC
   - [Crontab](#crontab)
   - [LCDProc configuration](#lcdproc-configuration)
 
-##About
+## About
 
 **backlight-toggle** is a tool to control backlight on HD44780 compatible LCDs,  
 connected through the PCF8574 to the embedded system.  
@@ -46,7 +46,7 @@ to turn the backlight on, considering:
 - -a \<address\> :device address on the bus
 - -s \<state\> : 0 - off, 1 - on.
 
-##Build requirements
+## Build requirements
 
 The easiest way to build the project on Linux machine is to do the following:  
 ```
@@ -71,7 +71,7 @@ As a result, I2C device will be available in the devfs:
 crw-rw----  1 root i2c      89,   1 Jul 13 20:29 i2c-1
 ```
 
-##Build & Install
+## Build & Install
 
 Assuming the source is downloaded and one is in the source folder. Consider doing  
 the following:  
@@ -83,13 +83,13 @@ user@vm:~/src/backlight_toggle$ sudo chown root:root backlight-toggle
 user@vm:~/src/backlight_toggle$ sudo mv backlight-toggle /usr/bin 
 ```
 
-##Playground
+## Playground
 
 For this part one needs to have **lcdproc** installed. (honestly, *lcdproc* **is** the reason why it's started).  
 Since I couldn't find the way how to turn the backlight on/off in *lcdproc* when I need it (I'd say - using  
 some schedule), I configured **crontab** and created a service for my purposes.  
 
-####Crontab
+#### Crontab
 If it's not created, let's do it (**cron** package should be installed beforehand).  
 ```
 # crontab -e
@@ -98,7 +98,7 @@ If it's not created, let's do it (**cron** package should be installed beforehan
 0   22 * * * /usr/bin/systemctl stop lcdproc && /usr/bin/backlight-toggle -d /dev/i2c-1 -a 0x27 -s 0
 ```
 
-###LCDProc configuration
+#### LCDProc configuration
 
 Now here is the fun. I'm using already built I2C bus expander board with pre-populated  
 PCF8574 & HD44780 compatible 2x16 LCD, so **lcdproc** doesn't work with it with the default  

@@ -169,6 +169,7 @@ BindsTo=lcdproc.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
+ExecStartPre=/bin/sleep 10
 ExecStart=/usr/bin/lcdproc
 
 [Install]
